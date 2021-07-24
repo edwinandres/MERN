@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const NuevoProyecto = () => {
+
+    const [proyecto, guardarProyecto] = useState({
+        nombre:''
+    })
+
+    const {nombre} = proyecto;
+
+    const onChange = (e) => {
+        guardarProyecto({
+            ...proyecto,
+            [e.target.name]:e.target.value
+        })
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+    }
+
+
     return (
         <>
             <button
@@ -9,13 +29,15 @@ const NuevoProyecto = () => {
             >Nuevo Proyecto</button>
             <form
                 className='formulario-nuevo-proyecto'
+                onSubmit={onSubmit}
             >
                 <input 
                     type="text" 
                     className='input-text'
                     placeholder='Nombre Proyecto'
                     name="nombre" 
-                    value=""
+                    value={nombre}
+                    onChange={onChange}
                 />
                 <input 
                     type="submit" 
