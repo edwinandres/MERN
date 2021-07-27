@@ -25,6 +25,7 @@ const ListadoTareas = () => {
                 }
                 
             </ul>
+            <button type="button" className='btn btn-eliminar'>Eliminar Proyecto &times;</button>
         </>
     )
 }
