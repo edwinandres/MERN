@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Proyecto from './Proyecto'
 import proyectoContext from '../../context/proyectos/proyectoContext'
 
@@ -9,10 +9,17 @@ const ListadoProyectos = () => {
 
     //*Extraer proyectos del stateInitial
     const proyectosContext = useContext(proyectoContext);
-    const {proyectos} = proyectosContext;
+    const {proyectos, obtenerProyectos} = proyectosContext;
+
+    useEffect(() => {
+        obtenerProyectos();
+     }, [])
+
 
     //*Si no hay proyectos
     if(proyectos.length === 0) return null;
+
+   
 
     return (
         <ul className='listado-proyectos'>
