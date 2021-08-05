@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 
 import proyectoContext from './proyectoContext';
 import proyectoReducer from './proyectoReducer';
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, AGREGAR_PROYECTO } from '../../types';
+import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS, AGREGAR_PROYECTO, VALIDAR_FORMULARIO, PROYECTO_ACTUAL } from '../../types';
 import {v4 as uuid} from "uuid"; 
 
 
@@ -18,6 +18,8 @@ const ProyectoState = props => {
     const initialState = {
         proyectos : [],        
         formulario : false,
+        errorFormulario : false,
+        proyecto : null
 
     }
 
@@ -48,15 +50,35 @@ const ProyectoState = props => {
         })
     }
 
+    //Validar formulario
+    const mostrarError = () => {
+        dispatch({
+            type:VALIDAR_FORMULARIO
+        })
+    }
+
+    //Selecciona el proyecto que el usuario clickeo
+    const proyectoActual = proyectoId => {
+        dispatch({
+            type: PROYECTO_ACTUAL,
+            payload : proyectoId
+        })
+    }
+
 
     return(
         <proyectoContext.Provider
             value={{
                 formulario : state.formulario,               
                 proyectos :state.proyectos,
+                errorFormulario : state.errorFormulario,
+                proyecto : state.proyecto,
                 mostrarFormulario,
                 obtenerProyectos,
-                agregarProyecto
+                agregarProyecto,
+                mostrarError,
+                proyectoActual
+                
             }}
         >
             {props.children}

@@ -5,7 +5,7 @@ const NuevoProyecto = () => {
 
     //obtener el state del formulario
     const proyectosContext = useContext(ProyectoContext)
-    const { formulario, mostrarFormulario, agregarProyecto } = proyectosContext;
+    const { formulario, errorFormulario, mostrarFormulario, agregarProyecto, mostrarError } = proyectosContext;
 
     const [proyecto, guardarProyecto] = useState({
         nombre: ''
@@ -23,7 +23,10 @@ const NuevoProyecto = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if(nombre == '')return
+        if(nombre == ''){
+            mostrarError()
+            return
+        }
         
         agregarProyecto(proyecto)
 
@@ -64,6 +67,10 @@ const NuevoProyecto = () => {
                     )
                 :
                     null
+            }
+            {errorFormulario
+                ?<p className='mensaje error'>El nombre es obligatorio</p>
+                :null
             }
 
         </>
