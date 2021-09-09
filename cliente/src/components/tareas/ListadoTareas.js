@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Tarea from './Tarea'
 import proyectoContext from '../../context/proyectos/proyectoContext'
+import TareaContext from '../../context/tareas/tareaContext'
 
 
 
@@ -10,18 +11,16 @@ const ListadoTareas = () => {
     const proyectosContext = useContext(proyectoContext)
     const {proyecto} = proyectosContext
 
+    const tareaContext = useContext(TareaContext)
+    const { tareasProyecto } = tareaContext;
+
     //si no hay proyecto seleccionado
     if(!proyecto) return <h2>Selecciona un proyecto</h2>
 
     const [proyectoActual] = proyecto
 
-    const tareasProyecto = [
-        {nombre:'Elegir Plataforma', estado:true},
-        {nombre:'Elegir dominio', estado:false},
-        {nombre:'Elegir hosting', estado:true},
-        {nombre:'Diseñar interfaz', estado:false},
     
-    ]
+
     return (
         <>
             <h2>Proyecto : {proyectoActual.nombre}</h2>
