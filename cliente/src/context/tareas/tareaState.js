@@ -1,7 +1,7 @@
 import { useState, useContext, useReducer } from "react";
 import TareaReducer from './tareaReducer';
 import TareaContext from './tareaContext';
-import { TAREAS_PROYECTO } from "../../types";
+import { AGREGAR_TAREA, TAREAS_PROYECTO, VALIDAR_FORMULARIO, VALIDAR_TAREA } from "../../types";
 
 
 
@@ -21,7 +21,8 @@ const initialState = {
         {nombre:'Elegir hosting', estado:true, proyectoId:4},
         {nombre:'Diseñar interfaz', estado:false, proyectoId:2},        
     ],
-    tareasProyecto:null
+    tareasProyecto:null,
+    errorTarea:false
 }
 
 const TareaState = props => {
@@ -39,6 +40,19 @@ const TareaState = props => {
         })
     }
 
+    const agregarTarea = tarea => {
+        dispatch({
+            type: AGREGAR_TAREA,
+            payload: tarea
+        })
+    }
+
+    const validarTarea = () => {
+        dispatch({
+            type: VALIDAR_TAREA
+        })
+    }
+
 
 
     return(
@@ -46,7 +60,10 @@ const TareaState = props => {
            value={{
                tareas:state.tareas,
                tareasProyecto :state.tareasProyecto,
+               errorTarea: state.errorTarea,
                obtenerTareas,
+               agregarTarea,
+               validarTarea
               
            }}
         >
